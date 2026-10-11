@@ -1,0 +1,282 @@
+<!DOCTYPE html> <!-- Izquierdo Gaytan Alexander 5°J -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#32105f">
+<title>URN | Una educación que sí te sirve</title>
+<style>
+	:root {
+		--morado: #32105f;
+		--morado-oscuro: #21083f;
+		--morado-medio: #492080;
+		--morado-claro: #6d43a0;
+		--goldenrod: #daa520;
+		--blanco: #fff;
+		--gris: #dedee3;
+	}
+	* { box-sizing: border-box; }
+	html { scroll-behavior: smooth; }
+	body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: #282330; background: #fff; }
+	button, a { font: inherit; }
+	a { color: inherit; text-decoration: none; }
+	.topbar {
+		min-height: 38px; padding: 0 4.5%; display: flex; align-items: center; gap: 7px;
+		background: var(--morado); color: #fff; font-size: .82rem; flex-wrap: wrap;
+	}
+	.top-links, .social-links { display: flex; align-items: center; gap: 5px; }
+	.social-links { margin-left: auto; }
+	.topbar a {
+		color: #fff; display: inline-flex; align-items: center; gap: 6px; padding: 8px 10px;
+		border-radius: 3px; white-space: nowrap; transition: background .2s, color .2s;
+	}
+	.top-links a:hover, .top-links a:focus-visible { background: var(--morado-oscuro); }
+	.social-links a { max-width: 38px; overflow: hidden; transition: max-width .25s ease, background .2s; }
+	.social-links a:hover, .social-links a:focus-visible { max-width: 190px; background: var(--morado-medio); }
+	.social-links .social-label { opacity: 0; transition: opacity .2s; }
+	.social-links a:hover .social-label, .social-links a:focus-visible .social-label { opacity: 1; }
+	.mainnav {
+		position: relative; z-index: 5; display: flex; align-items: center; justify-content: space-between;
+		gap: 25px; padding: 16px 4.5%; background: rgba(50,16,95,.91); color: white;
+	}
+	.brand { display: inline-flex; flex-direction: column; flex-shrink: 0; line-height: 1; }
+	.brand-name { font-size: 2rem; font-weight: 800; letter-spacing: 3px; }
+	.brand-tagline { margin-top: 7px; font-size: .58rem; letter-spacing: .65px; font-weight: 600; }
+	.navlinks { display: flex; align-items: center; justify-content: flex-end; gap: clamp(10px, 1.4vw, 23px); flex-wrap: wrap; }
+	.navlinks button {
+		padding: 8px 0; border: 0; background: transparent; color: #fff; cursor: pointer;
+		font-size: .91rem; transition: color .2s; white-space: nowrap;
+	}
+	.navlinks button:hover, .navlinks button:focus-visible { color: var(--goldenrod); }
+	.navlinks button:focus-visible, a:focus-visible { outline: 2px solid var(--goldenrod); outline-offset: 3px; }
+	.hero {
+		min-height: 390px; display: flex; align-items: center; justify-content: center; text-align: center;
+		color: #fff; position: relative; overflow: hidden;
+		background-image: linear-gradient(rgba(50,16,95,.68), rgba(50,16,95,.72)), url('https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=2000&q=85');
+		background-size: cover; background-position: center 45%; background-attachment: fixed;
+	}
+	.hero-content { padding: 55px 20px; position: relative; z-index: 1; }
+	.hero h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); margin: 0 0 12px; font-weight: 750; }
+	.hero p { margin: 0; letter-spacing: 2px; font-size: clamp(.85rem, 1.5vw, 1.05rem); font-weight: 600; }
+	.section { padding: 54px 5% 58px; }
+	.section-title { margin: 0 0 30px; text-align: center; color: var(--goldenrod); font-size: clamp(1.8rem, 3vw, 2.4rem); }
+	.modalidades { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; max-width: 1080px; margin: 0 auto; }
+	.modalidad-card {
+		min-height: 150px; padding: 25px 12px; border-radius: 5px; background: var(--morado);
+		color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center;
+		gap: 14px; text-align: center; box-shadow: 0 5px 14px rgba(33,8,63,.13);
+		transition: transform .2s, background .2s;
+	}
+	.modalidad-card:hover { transform: translateY(-4px); background: var(--morado-medio); }
+	.modalidad-card .emoji { font-size: 2.2rem; line-height: 1; }
+	.modalidad-card strong { font-size: 1.08rem; }
+	.separator { border: 0; border-top: 1px solid var(--gris); margin: 0 5%; }
+	.feature-image { padding: 48px 5% 60px; display: flex; justify-content: center; }
+	.feature-image img { display: block; width: min(100%, 1040px); height: clamp(220px, 35vw, 410px); object-fit: cover; border-radius: 4px; }
+	.campus-grid { max-width: 1150px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+	.campus-card { margin: 0; overflow: hidden; border-radius: 5px; background: #fff; box-shadow: 0 5px 18px rgba(33,8,63,.12); }
+	.campus-card img { width: 100%; height: 220px; display: block; object-fit: cover; transition: transform .35s; }
+	.campus-card:hover img { transform: scale(1.04); }
+	.campus-card figcaption { padding: 17px 15px; color: var(--morado); font-weight: 700; text-align: center; font-size: 1.13rem; }
+	.footer-main {
+		color: white; background-image: linear-gradient(rgba(50,16,95,.94), rgba(50,16,95,.94)), url('https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=2000&q=85');
+		background-size: cover; background-position: center; padding: 42px 5%;
+	}
+	.footer-inner { display: grid; grid-template-columns: minmax(210px, .85fr) 2fr; gap: 42px; max-width: 1250px; margin: 0 auto; align-items: start; }
+	.footer-brand { padding: 8px 0 0 8px; }
+	.footer-brand .brand-name { font-size: 2.65rem; }
+	.footer-brand .brand-tagline { font-size: .7rem; }
+	.addresses { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 28px; }
+	.address h3 { color: var(--goldenrod); font-size: .95rem; margin: 0 0 11px; letter-spacing: .4px; }
+	.address p { margin: 0; line-height: 1.7; font-size: .88rem; }
+	.copyright { background: var(--goldenrod); color: white; text-align: center; padding: 15px 16px; font-size: .9rem; }
+	.whatsapp {
+		position: fixed; z-index: 20; left: 18px; bottom: 18px; background: #25D366; color: #fff;
+		border-radius: 999px; display: flex; align-items: center; gap: 9px; padding: 12px 17px;
+		font-weight: 700; box-shadow: 0 4px 14px rgba(0,0,0,.25); transition: transform .2s;
+	}
+	.whatsapp:hover { transform: translateY(-3px); }
+	.whatsapp .wa-icon { font-size: 1.35rem; }
+	.page[hidden] { display: none; }
+	@media (max-width: 1050px) {
+		.mainnav { align-items: flex-start; flex-direction: column; gap: 18px; }
+		.navlinks { justify-content: flex-start; }
+		.addresses { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	}
+	@media (max-width: 700px) {
+		.topbar { padding: 4px 3%; }
+		.social-links { margin-left: 0; flex-wrap: wrap; }
+		.topbar a { padding: 7px 8px; }
+		.hero { min-height: 330px; background-attachment: scroll; }
+		.modalidades { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+		.campus-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+		.campus-card img { height: 160px; }
+		.footer-inner { grid-template-columns: 1fr; gap: 28px; }
+		.footer-brand { padding-left: 0; }
+		.addresses { gap: 22px 16px; }
+	}
+	@media (max-width: 430px) {
+		.brand-name { font-size: 1.7rem; }
+		.navlinks { gap: 8px 15px; }
+		.navlinks button { font-size: .85rem; }
+		.campus-grid, .addresses { grid-template-columns: 1fr; }
+		.whatsapp { left: 12px; bottom: 12px; padding: 11px 14px; }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		*, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+		.hero { background-attachment: scroll; }
+	}
+</style>
+</head>
+<body>
+	<div class="topbar" aria-label="Enlaces rápidos">
+		<div class="top-links">
+			<a href="#" aria-label="Acceso">🔐 Acceso</a>
+			<a href="#" aria-label="Campus Chihuahua">📍 Chihuahua</a>
+			<a href="#" aria-label="Campus Juárez">📍 Juarez</a>
+		</div>
+		<div class="social-links">
+			<a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><span>📘</span><span class="social-label">Facebook</span></a>
+			<a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><span>📸</span><span class="social-label">Instagram</span></a>
+			<a href="tel:+526144111451" aria-label="Teléfono"><span>📞</span><span class="social-label">Teléfono</span></a>
+			<a href="mailto:contacto@urn.edu.mx" aria-label="Correo electrónico"><span>✉️</span><span class="social-label">Correo</span></a>
+		</div>
+	</div>
+
+	<nav class="mainnav" aria-label="Navegación principal">
+		<a class="brand" href="#" data-page="inicio" aria-label="URN, inicio">
+			<span class="brand-name">URN</span><span class="brand-tagline">UNA EDUCACIÓN QUE SI TE SIRVE</span>
+		</a>
+		<div class="navlinks">
+			<button type="button" data-page="inicio">Inicio</button>
+			<button type="button">¿Por qué URN?</button>
+			<button type="button">Licenciaturas</button>
+			<button type="button">Posgrados</button>
+			<button type="button" data-page="campus">Campus</button>
+			<button type="button">Servicios escolares</button>
+			<button type="button">Unidades</button>
+			<button type="button">Contacto</button>
+		</div>
+	</nav>
+
+	<main>
+		<section id="inicio" class="page">
+			<header class="hero">
+				<div class="hero-content">
+					<h1>Campus Cd. Juárez</h1>
+					<p>UNA EDUCACIÓN QUE SI TE SIRVE</p>
+				</div>
+			</header>
+
+			<section class="section" aria-labelledby="modalidad-title">
+				<h2 id="modalidad-title" class="section-title">Modalidad</h2>
+				<div class="modalidades">
+					<article class="modalidad-card"><span class="emoji" aria-hidden="true">🧑‍🏫</span><strong>Escolarizada</strong></article>
+					<article class="modalidad-card"><span class="emoji" aria-hidden="true">🏫</span><strong>Dies</strong></article>
+					<article class="modalidad-card"><span class="emoji" aria-hidden="true">🗓️</span><strong>Sabatino</strong></article>
+					<article class="modalidad-card"><span class="emoji" aria-hidden="true">💻</span><strong>Virtual</strong></article>
+				</div>
+			</section>
+
+			<hr class="separator">
+
+			<section class="feature-image" aria-label="Imagen destacada del campus">
+				<img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1600&q=85" alt="Edificio universitario y áreas del campus">
+			</section>
+		</section>
+
+		<section id="campus" class="page" hidden>
+			<header class="hero">
+				<div class="hero-content"><h1>Campus</h1></div>
+			</header>
+			<section class="section" aria-label="Nuestros campus">
+				<div class="campus-grid">
+					<figure class="campus-card">
+						<img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=900&q=80" alt="Edificio universitario en Chihuahua" loading="lazy">
+						<figcaption>Chihuahua</figcaption>
+					</figure>
+					<figure class="campus-card">
+						<img src="https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?auto=format&fit=crop&w=900&q=80" alt="Instalaciones universitarias de Ciudad Juárez" loading="lazy">
+						<figcaption>Cd. Juárez</figcaption>
+					</figure>
+					<figure class="campus-card">
+						<img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=900&q=80" alt="Instalaciones universitarias de Nuevo Casas Grandes" loading="lazy">
+						<figcaption>Nuevo Casas Grandes</figcaption>
+					</figure>
+					<figure class="campus-card">
+						<img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=900&q=80" alt="Instalaciones universitarias de Cuauhtémoc" loading="lazy">
+						<figcaption>Cuauhtémoc</figcaption>
+					</figure>
+					<figure class="campus-card">
+						<img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80" alt="Instalaciones universitarias de Parral" loading="lazy">
+						<figcaption>Parral</figcaption>
+					</figure>
+					<figure class="campus-card">
+						<img src="https://images.unsplash.com/photo-1519457431-44ccd64a579b?auto=format&fit=crop&w=900&q=80" alt="Instalaciones universitarias de Delicias" loading="lazy">
+						<figcaption>Delicias</figcaption>
+					</figure>
+				</div>
+			</section>
+		</section>
+	</main>
+
+	<footer>
+		<div class="footer-main">
+			<div class="footer-inner">
+				<div class="footer-brand">
+					<div class="brand">
+						<span class="brand-name">URN</span>
+						<span class="brand-tagline">UNA EDUCACIÓN QUE SI TE SIRVE</span>
+					</div>
+				</div>
+				<div class="addresses">
+					<section class="address">
+						<h3>CHIHUAHUA</h3>
+						<p>Calle Allende No. 2628<br>Col. Zarco<br>(614) 411-14-51</p>
+					</section>
+					<section class="address">
+						<h3>CD. JUÁREZ</h3>
+						<p>Camino Viejo a San José<br>No.10051<br>Col Partido Senecú<br>(656) 687-2447 / 687-0678<br>687-2446</p>
+					</section>
+					<section class="address">
+						<h3>NUEVO CASAS GRANDES</h3>
+						<p>Libramiento Gómez Morín<br>y Minerva No. 1410<br>(636) 694-0873</p>
+					</section>
+					<section class="address">
+						<h3>CUAUHTÉMOC</h3>
+						<p>Km. 2 carretera Anáhuac<br>Col. Parque Industrial<br>Cuauhtémoc<br>(625) 582-7588 / 112-1801</p>
+					</section>
+					<section class="address">
+						<h3>PARRAL</h3>
+						<p>Perimetral Sur Luis<br>Donaldo Colosio<br>Km. 1920, Col. Cerro Blanco<br>(627) 525-4000</p>
+					</section>
+					<section class="address">
+						<h3>DELICIAS</h3>
+						<p>Calle 3a Sur &amp; Av 8a Sur<br>Sur 711<br>(639) 100 42 42</p>
+					</section>
+				</div>
+			</div>
+		</div>
+		<div class="copyright">© 2026 URN Todos los derechos reservados | Powered by AP Producciones</div>
+	</footer>
+
+	<a class="whatsapp" href="https://wa.me/" target="_blank" rel="noopener noreferrer" aria-label="Envíanos mensaje por WhatsApp">
+		<span class="wa-icon" aria-hidden="true">☏</span><span>Envianos mensaje</span>
+	</a>
+
+<script>
+	const pageSections = document.querySelectorAll('.page');
+	function showPage(pageName) {
+		pageSections.forEach(section => { section.hidden = section.id !== pageName; });
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+		document.title = pageName === 'campus' ? 'Campus | URN' : 'URN | Una educación que sí te sirve';
+	}
+	document.querySelectorAll('[data-page]').forEach(control => {
+		control.addEventListener('click', event => {
+			event.preventDefault();
+			showPage(control.dataset.page);
+		});
+	});
+</script>
+</body>
+</html>
